@@ -1,5 +1,16 @@
 .box {
   display: flex;
-  color: black;
-  border-style: solid;
+  height: 40rem;
+  width: auto;
+  border: 0.4rem solid pink;
+  flex-wrap: wrap;
+}
+
+.apple-img {
+  height: 10rem;
+  display: flex;
+}
+
+.orange-img {
+  display: flex;
 }

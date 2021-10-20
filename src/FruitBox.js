@@ -1,12 +1,21 @@
-import React from 'react';
-import './FruitBox.css';
+import React from "react";
+import "./FruitBox.css";
+import Apple from "./Apple.js";
+import Orange from "./Orange";
 
 function FruitBox() {
-  return(
+  return (
     <React.Fragment>
-     <span class="box"></span>
+      <div class="box">
+        <Apple />
+        <Orange />
+        <Apple />
+        <Orange />
+        <Orange />
+        <Orange />
+      </div>
     </React.Fragment>
-  )
+  );
 }
 
 export default FruitBox;
