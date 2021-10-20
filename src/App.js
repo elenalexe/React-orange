@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Cat from './Cat.js';
+import FruitBox from './FruitBox.js';
 
 function App() {
   return (
@@ -16,8 +18,11 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
+          Test "Hello World"
         </a>
       </header>
+      <Cat />
+      <FruitBox />
     </div>
   );
 }

@@ -1,0 +1,5 @@
+.box {
+  display: flex;
+  color: black;
+  border-style: solid;
+}
