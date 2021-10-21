@@ -1,4 +1,4 @@
-button{
+button {
   border: 0;
   background: black;
   color: #fff;
@@ -23,4 +23,19 @@ button span {
 
 .ternary-button {
   background: darkolivegreen;
+}
+
+.form-control {
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 20px;
+  justify-content: center;
+  color: pink;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
 }

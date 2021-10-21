@@ -1,8 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
-import Cat from './Cat.js';
-import FruitBox from './FruitBox.js';
-import Button from './Button';
+import logo from "./logo.svg";
+import "./App.css";
+import Cat from "./Cat.js";
+import FruitBox from "./FruitBox.js";
+import Button from "./Button";
+import UserForm from "./UserForm.js";
+import FormControl from "./FormControl.js";
 
 function App() {
   return (
@@ -18,11 +20,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
-          Test "Hello World"
+          Learn React Test "Hello World"
         </a>
       </header>
-      <Cat name ="business cat">
+      <Cat name="business cat">
         <span>This is my Cat</span>
       </Cat>
       {/* <FruitBox /> */}
@@ -31,6 +32,10 @@ function App() {
       <Button icon="fas fa-user" label="My Profile" theme="ternary-button" />
       <Button icon="fas fa-power-off" label="Log out" />
       <Button icon="fas fa-pencil" label="Edit" theme="secondary-button" />
+      <UserForm title="Register" />
+      <Button label="Register" />
+      <UserForm title="Edit Profile" />
+      <Button label="Update" />
     </div>
   );
 }
