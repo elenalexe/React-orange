@@ -2,6 +2,8 @@ import React from "react";
 import "./FruitBox.css";
 import Apple from "./Apple.js";
 import Orange from "./Orange";
+import Button from './Button';
+
 
 function FruitBox() {
   return (

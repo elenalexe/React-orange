@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Cat from './Cat.js';
 import FruitBox from './FruitBox.js';
+import Button from './Button';
 
 function App() {
   return (
@@ -21,8 +22,15 @@ function App() {
           Test "Hello World"
         </a>
       </header>
-      <Cat />
-      <FruitBox />
+      <Cat name ="business cat">
+        <span>This is my Cat</span>
+      </Cat>
+      {/* <FruitBox /> */}
+      <Button label="Home" />
+      <Button label="About" />
+      <Button icon="fas fa-user" label="My Profile" theme="ternary-button" />
+      <Button icon="fas fa-power-off" label="Log out" />
+      <Button icon="fas fa-pencil" label="Edit" theme="secondary-button" />
     </div>
   );
 }
