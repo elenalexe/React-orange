@@ -5,29 +5,52 @@ import FruitBox from "./FruitBox.js";
 import Button from "./Button";
 import UserForm from "./UserForm.js";
 import FormControl from "./FormControl.js";
+import Clock from "./Clock";
+import React from "react";
 
-function App() {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+    }
+  }
+
+  componentDidMount() {
+    this.anotherTimer  = setInterval(() => {
+      this.setState({
+        date: new Date(),
+      });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.anotherTimer);
+  }
+
+  render() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
+       <Clock date={new Date()}/>
+    {/* <header className="App-header"> */}
+    {/* <img src={logo} className="App-logo" alt="logo" />
+    <p>
+    Edit <code>src/App.js</code> and save to reload.
+    </p>
+    <a
+    className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React Test "Hello World"
-        </a>
-      </header>
-      <Cat name="business cat">
+        </a> */}
+      {/* </header> */}
+      {/* <Cat name="business cat">
         <span>This is my Cat</span>
       </Cat>
       {/* <FruitBox /> */}
-      <Button label="Home" />
+      {/* <Button label="Home" />
       <Button label="About" />
       <Button icon="fas fa-user" label="My Profile" theme="ternary-button" />
       <Button icon="fas fa-power-off" label="Log out" />
@@ -35,9 +58,11 @@ function App() {
       <UserForm title="Register" />
       <Button label="Register" />
       <UserForm title="Edit Profile" />
-      <Button label="Update" />
+      <Button label="Update" /> */}
+         
     </div>
   );
+}
 }
 
 export default App;
