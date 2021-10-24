@@ -34,26 +34,24 @@ class App extends React.Component {
     this.state = {
       counter: 0
     };
+    this._incrementOranges = this._incrementOranges.bind(this);
   }
 
-  MoreOranges = () => {
-    this.setState(({ counter }) => ({
-      counter: counter + 1
-    }));
-  };
+  _incrementOranges() {
+    this.setState({
+      ...this.state, counter: this.state.counter + 1
+    })
+  }
 
   render() {
     return (
       <div className="App">
         {/* <Clock date={new Date()} /> */}
-        <OrangeCounter />
-        <span>Click to buy:
-          <button onClick={this.MoreOranges}>Give me helth!</button>
-        </span>
-        <br />
-        <br />
-        <span>You got {this.state.counter} oranges bro!</span>
-        <div>{Array.from({ length: this.state.counter }, () => "🍊")}</div>
+        <OrangeCounter oranges={this.state.counter} />
+        <button onClick={this._incrementOranges}>Give me helth!</button>
+
+
+
 
         {/* <header className="App-header"> */}
         {/* <img src={logo} className="App-logo" alt="logo" />
