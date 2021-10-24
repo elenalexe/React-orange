@@ -7,33 +7,56 @@ import UserForm from "./UserForm.js";
 import FormControl from "./FormControl.js";
 import Clock from "./Clock";
 import React from "react";
+import OrangeCounter from "./OrangeCounter";
 
 class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     date: new Date(),
+  //   }
+  // }
+
+  // componentDidMount() {
+  //   this.anotherTimer = setInterval(() => {
+  //     this.setState({
+  //       date: new Date(),
+  //     });
+  //   }, 1000);
+  // }
+
+  // componentWillUnmount() {
+  //   clearInterval(this.anotherTimer);
+  // }
+
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date(),
-    }
+      counter: 0
+    };
   }
 
-  componentDidMount() {
-    this.anotherTimer  = setInterval(() => {
-      this.setState({
-        date: new Date(),
-      });
-    }, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.anotherTimer);
-  }
+  MoreOranges = () => {
+    this.setState(({ counter }) => ({
+      counter: counter + 1
+    }));
+  };
 
   render() {
-  return (
-    <div className="App">
-       <Clock date={new Date()}/>
-    {/* <header className="App-header"> */}
-    {/* <img src={logo} className="App-logo" alt="logo" />
+    return (
+      <div className="App">
+        {/* <Clock date={new Date()} /> */}
+        <OrangeCounter />
+        <span>Click to buy:
+          <button onClick={this.MoreOranges}>Give me helth!</button>
+        </span>
+        <br />
+        <br />
+        <span>You got {this.state.counter} oranges bro!</span>
+        <div>{Array.from({ length: this.state.counter }, () => "🍊")}</div>
+
+        {/* <header className="App-header"> */}
+        {/* <img src={logo} className="App-logo" alt="logo" />
     <p>
     Edit <code>src/App.js</code> and save to reload.
     </p>
@@ -45,12 +68,12 @@ class App extends React.Component {
         >
           Learn React Test "Hello World"
         </a> */}
-      {/* </header> */}
-      {/* <Cat name="business cat">
+        {/* </header> */}
+        {/* <Cat name="business cat">
         <span>This is my Cat</span>
       </Cat>
       {/* <FruitBox /> */}
-      {/* <Button label="Home" />
+        {/* <Button label="Home" />
       <Button label="About" />
       <Button icon="fas fa-user" label="My Profile" theme="ternary-button" />
       <Button icon="fas fa-power-off" label="Log out" />
@@ -59,10 +82,10 @@ class App extends React.Component {
       <Button label="Register" />
       <UserForm title="Edit Profile" />
       <Button label="Update" /> */}
-         
-    </div>
-  );
-}
+
+      </div>
+    );
+  }
 }
 
 export default App;
