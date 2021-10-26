@@ -1,86 +1,88 @@
 import React from "react";
 
 class ArrayLand extends React.Component {
+  timeout;
   constructor(props) {
     super(props);
-    this.state =  {
+    this.state = {
       boxes: [
-          [
-              '🍊','🍊','🍋','🍌','🍋','🍌','🍋','🍊','🍌','🍌'
-          ],
-  
-          [
-              '🍋','🍋','🍊','🍌','🍊','🍌','🍋','🍋','🍊','🍊','🍌',
-          ],
-  
-          [
-              '🍌','🍋','🍌','🍋','🍊','🍌','🍌',
-          ]
+        [
+          '🍊', '🍊', '🍋', '🍌', '🍋', '🍌', '🍋', '🍊', '🍌', '🍌'
+        ],
+
+        [
+          '🍋', '🍋', '🍊', '🍌', '🍊', '🍌', '🍋', '🍋', '🍊', '🍊', '🍌',
+        ],
+
+        [
+          '🍌', '🍋', '🍌', '🍋', '🍊', '🍌', '🍌',
         ]
+      ]
     }
   }
 
-  SortFruits = (a,b) => { 
+  sortFruits = () => {
     let fruits = this.state.boxes;
-    let sortOrder = ['🍊','🍌','🍋']
-    fruits.map((fruit) => fruit.sort((a,b) => sortOrder.indexOf(a) - sortOrder.indexOf(b)));
+    let sortOrder = ['🍊', '🍌', '🍋']
+    fruits.map((fruit) => fruit.sort((a, b) => sortOrder.indexOf(a) - sortOrder.indexOf(b)));
     this.setState({
       boxes: fruits,
-    }) 
-  };
-
-  // SortBoxes = () => {
-  //   let isOrange = "🍊";
-  //   let isBanana = "🍌";
-  //   let isLemon = "🍋";
-
-  //   if(this.state.boxes === isOrange) {
-  //     boxes[0] = isOrange;
-  //   }else if(this.state.boxes === isBanana) {
-  //     boxes[1] = isBanana;
-  //   }else if(this.state.boxes === isLemon) {
-  //     boxes[2] = isLemon;
-  //   }
-
-  // }
-
-  SortBoxes = () => {
-    let newBoxes=[
-      [],
-      [],
-      [],
-    ]
-    let fruits = this.state.boxes;
-    let sortedBoxes = ['🍊','🍌','🍋']
-    fruits.map((fruit) => {
-      fruit.map((frui) => {
-        sortedBoxes.map((el, index) => {
-          if(frui == el) {
-            newBoxes[index].push(frui[0]);
-          }
-        })
-      })
     })
-    // sortedBoxes.map((fruit, index) => console.log(index));
-      // console.log(newBoxes)
-    // this.setState({
-    //   boxes: newBoxes,
-    // })
+    this.shuffleFruits();
   }
 
-
-  render() {
-    return(
-      <>
-        <h1>Array Land</h1>
-        <br />
-        {this.state.boxes.map((boxes) =>
-        <div class="box">{boxes}</div>)}
-        <button class="sort-fruits" onClick={this.SortFruits}>Click to sort those fruits</button>
-        <button class="sort-fruits" onClick={this.SortBoxes}>Click to sort those boxes</button>
-      </>
-    )
+  const orderedFruits = fruits.flat().reduce(assignFruit, newBoxes);
+    this.setState({
+    boxes: [orderedFruits.oranges, orderedFruits.bananas, orderedFruits.lemons],
+  })
+this.shuffleFruits();
   }
+
+shuffleFruits = () => {
+  if (this.timeout) {
+    clearTimeout(this.timeout);
+  }
+
+  let fruits = this.state.boxes;
+  const newBoxes = [
+    [],
+    [],
+    [],
+  ]
+
+  const assignFruit = (prevValue, currentVal) => {
+    const randomNumber = Math.floor(Math.random() * 3);
+    newBoxes[randomNumber].push(currentVal);
+    return prevValue;
+  }
+
+  const randomized = fruits.flat().reduce(assignFruit, newBoxes);
+
+  this.timeout = setTimeout(() => {
+    this.setState({
+      boxes: randomized,
+    });
+  }, 3000);
+}
+
+componentWillUnmount() {
+  if (this.timeout) {
+    clearTimeout(this.timeout);
+  }
+}
+
+render() {
+  return (
+    <>
+      <h1>Array Land</h1>
+      <br />
+      {this.state.boxes.map((boxes) =>
+        <div className="box">{boxes}</div>)}
+      <button className="sort-fruits" onClick={this.sortFruits}>Click to sort those fruits</button>
+      <button className="sort-fruits" onClick={this.sortBoxes}>Click to sort those boxes</button>
+    </>
+  )
+}
 }
 
 export default ArrayLand;
