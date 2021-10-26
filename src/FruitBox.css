@@ -1,4 +1,4 @@
-.box {
+.boxx {
   display: flex;
   height: 40rem;
   width: auto;
@@ -13,4 +13,12 @@
 
 .orange-img {
   display: flex;
+}
+
+.box {
+  border: 0.4rem solid brown;
+  display: block;
+  width: 20rem;
+  justify-content: space-between;
+
 }

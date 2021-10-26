@@ -8,6 +8,7 @@ import FormControl from "./FormControl.js";
 import Clock from "./Clock";
 import React from "react";
 import OrangeCounter from "./OrangeCounter";
+import ArrayLand from "./ArrayLand";
 
 class App extends React.Component {
   // constructor(props) {
@@ -49,6 +50,7 @@ class App extends React.Component {
         {/* <Clock date={new Date()} /> */}
         <OrangeCounter oranges={this.state.counter} />
         <button onClick={this._incrementOranges}>Give me helth!</button>
+        <ArrayLand />
 
 
 
