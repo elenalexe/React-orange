@@ -14,7 +14,7 @@ class Cat extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <h1 class="cat">This is my business cat.</h1>
+        <h1 className="cat">This is my business cat.</h1>
       </React.Fragment>
     )
   }

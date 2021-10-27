@@ -29,22 +29,25 @@ class UserList extends React.Component {
       users: USER_DATA,
       column: '',
       direction: 'asc',
+      value: '',
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   sortByUsername = () => {
     let sortedArray = this.state.users.slice();
     let direction = this.state.direction;
-    if(this.state.column === 'username') {
+    if (this.state.column === 'username') {
       direction = direction === 'asc' ? 'desc' : 'asc';
     }
-    sortedArray.sort((a,b) => {
-      if(direction === 'asc') {
+    sortedArray.sort((a, b) => {
+      if (direction === 'asc') {
         //asc sort
-      return a.username > b.username ? 1 : a.username < b.username ? -1 : 0;
+        return a.username > b.username ? 1 : a.username < b.username ? -1 : 0;
       } else {
         //desc sort
-      return a.username > b.username ? -1 : a.username < b.username ? 1 : 0;
+        return a.username > b.username ? -1 : a.username < b.username ? 1 : 0;
       }
     });
     this.setState({
@@ -58,68 +61,93 @@ class UserList extends React.Component {
     let sortedArray = this.state.users.slice();
     let direction = this.state.direction;
 
-    if(this.state.column === 'email') {
+    if (this.state.column === 'email') {
       direction = direction === 'asc' ? 'desc' : 'asc';
     }
 
-    sortedArray.sort((a,b) => {
-      if(direction === 'asc') {
+    sortedArray.sort((a, b) => {
+      if (direction === 'asc') {
         //asc sort
         return a.email > b.email ? 1 : a.email < b.email ? -1 : 0;
       } else {
         //desc sort
-      return a.email > b.email ? -1 : a.email < b.email ? 1 : 0;
+        return a.email > b.email ? -1 : a.email < b.email ? 1 : 0;
       }
-      });
+    });
 
-      this.setState({
-        users: sortedArray,
-        column: 'email',
-        direction: direction,
-      });
+    this.setState({
+      users: sortedArray,
+      column: 'email',
+      direction: direction,
+    });
   }
 
+  handleChange(event) {
+    this.setState({
+      users: event.target.users,
+      column: 'username',
+      direction: '',
+    });
+  }
 
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.users);
+    event.preventDefault();
+  }
 
   render() {
     return (
       <React.Fragment>
+        <div className="form-control">
+          <form onSubmit={this.handleSubmit}>
+            <label>Filter:
+              <input type="text" value={this.state.value} onChange={this.handleChange} name="filter"></input>
+            </label>
+            <input type="submit" value="Submit"></input>
+          </form>
+        </div>
         <table className="table table-dark">
           <thead>
             <tr className="table-dark">
-            <th>#</th>
-            <th><button className="btn btn-danger" onClick={this.sortByUsername}>
-              <span>Username</span>
-              {this.state.column === 'username' &&
-              <span className={[
-                  "fas", 
-                  this.state.direction === 'asc' ? 'fa-angle-up': 'fa-angle-down'
-                ].join(' ')}></span>
-              }
+              <th>#</th>
+              <th><button className="btn btn-danger" onClick={this.sortByUsername}>
+                <span>Username</span>
+                {this.state.column === 'username' &&
+                  <span className={[
+                    "fas",
+                    this.state.direction === 'asc' ? 'fa-angle-up' : 'fa-angle-down'
+                  ].join(' ')}></span>
+                }
               </button></th>
-            <th><button className="btn btn-warning" onClick={this.sortByEmail}>
-              <span>Email</span>
-              {this.state.column === 'email' &&
-              <span className={[
-                  "fas", 
-                  this.state.direction === 'asc' ? 'fa-angle-up': 'fa-angle-down'
-                ].join(' ')}></span>
-              }
+              <th><button className="btn btn-warning" onClick={this.sortByEmail}>
+                <span>Email</span>
+                {this.state.column === 'email' &&
+                  <span className={[
+                    "fas",
+                    this.state.direction === 'asc' ? 'fa-angle-up' : 'fa-angle-down'
+                  ].join(' ')}></span>
+                }
               </button></th>
             </tr>
           </thead>
           <tbody>
             {this.state.users.map((user, index) => {
-              return(
+              return (
                 <tr key="index">
-                <td>{index+1}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-              </tr>
+                  <td>{index + 1}</td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                </tr>
               )
             })}
             <tr></tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <th></th>
+              <th colSpan="3"></th>
+            </tr>
+          </tfoot>
         </table>
       </React.Fragment>
     )
