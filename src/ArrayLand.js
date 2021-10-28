@@ -96,8 +96,8 @@ class ArrayLand extends React.Component {
       <>
         <h1>Array Land</h1>
         <br />
-        {this.state.boxes.map((boxes) =>
-          <div className="box">{boxes}</div>)}
+        {this.state.boxes.map((boxes, idx) =>
+          <div className="box" key={idx}>{boxes}</div>)}
         <button className="sort-fruits" onClick={this.sortFruits}>Click to sort those fruits</button>
         <button className="sort-fruits" onClick={this.sortBoxes}>Click to sort those boxes</button>
       </>

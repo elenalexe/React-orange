@@ -3,12 +3,12 @@ import "./forms.css";
 
 function FormControl(props) {
   return (
-    <React.Fragment>
+    <>
       <div className="form-control">
-        <label for={props.id}>{props.label}</label>
-        <input type={props.type} id={props.id} name={props.name}></input>
+        <label htmlFor={props.id}>{props.label}</label>
+        <input type={props.type} id={props.id} name={props.name} onChange={props.onChange} value={props.value} />
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
