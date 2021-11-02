@@ -1,48 +1,66 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
 
-class HandleLogin extends React.Component{
+const VALID_LOGIN = {
+  username: "",
+  password: "HouseOfTheMouse",
+}
+
+class HandleLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
-  handleChange = (event) => {
-    const username = event.username;
-    const password = event.password;
+  handlePasswordChange = (event) => {
+    const passwordInput = event.target.value
 
     this.setState({
-      [username.name]: username,
-      [password.name]: password,
+      username: this.state.username,
+      password: passwordInput
+    });
+  };
 
+  handleUsernameChange = (event) => {
+    const usernameInput = event.target.value
+
+    this.setState({
+      username: usernameInput,
+      password: this.state.password,
     });
   };
 
   handleFormSubmit = () => {
-    const {username, password} = this.state;
-    localStorage.setItem('username', username);
-    localStorage.setItem('password', password);
+    const { username, password } = this.state;
+    if (username !== '' && password === VALID_LOGIN.password) {
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+    }
   }
 
   componentDidMount() {
     const username = localStorage.getItem('username');
     const password = localStorage.getItem('password');
-    this.setState({username, password});
+
+    if (username && password) {
+      this.setState({ username, password });
+    }
   }
 
-  render(){
-  return(
-    <form onSubmit={this.handleFormSubmit}>
-    <label>Username: <input name="username" value={this.state.username} onChange={this.handleChange} />
-    </label>
-    <label> Password: <input name="password" value={this.state.password} onChange={this.handleChange} />
-    </label>
-    <button type="submit">Login</button>
-    </form>
+  render() {
+    return (
+      <form onSubmit={this.handleFormSubmit}>
+        <label>Username: <input name="username" value={this.state.username} onChange={this.handleUsernameChange} />
+        </label>
+        <label> Password: <input name="password" value={this.state.password} onChange={this.handlePasswordChange} />
+        </label>
+        <button type="submit">Login</button>
+      </form>
     );
   }
 }
