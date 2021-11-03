@@ -35,12 +35,23 @@ class HandleLogin extends React.Component {
     });
   };
 
-  handleFormSubmit = () => {
+  handleFormSubmit = (event) => {
     const { username, password } = this.state;
     if (username !== '' && password === VALID_LOGIN.password) {
       localStorage.setItem('username', username);
       localStorage.setItem('password', password);
+      this.setState({
+        hasTriedToSubmitWrongPass: false,
+      })
+    } else {
+      this.setState({
+        username: this.state.username,
+        password: this.state.password,
+        hasTriedToSubmitWrongPass: true,
+      });
+      event.preventDefault();
     }
+
   }
 
   componentDidMount() {
@@ -52,15 +63,31 @@ class HandleLogin extends React.Component {
     }
   }
 
+  handleLogout() {
+    localStorage.clear();
+    window.location.href = '/';
+  }
+
   render() {
+    const username = localStorage.getItem('username');
+    const password = localStorage.getItem('password');
+    if (password === VALID_LOGIN.password) {
+      return (
+        < div className="welcome" >
+          <p>Welcome {username}</p>
+          <button className="logout" onClick={this.handleLogout}>Logout</button>
+        </div >
+      )
+    }
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      <form className="login-form" onSubmit={this.handleFormSubmit} >
         <label>Username: <input name="username" value={this.state.username} onChange={this.handleUsernameChange} />
         </label>
         <label> Password: <input name="password" value={this.state.password} onChange={this.handlePasswordChange} />
         </label>
-        <button type="submit">Login</button>
-      </form>
+        {this.state.hasTriedToSubmitWrongPass && <p className="error">Your password is invalid</p>}
+        <button className="login-button" type="submit" onSubmit={this.validLogin}>Login</button>
+      </form >
     );
   }
 }
